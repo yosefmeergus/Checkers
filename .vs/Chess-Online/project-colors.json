@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "5c91edde-e140-5786-744a-8bb537668a31": {
+      "ProjectGuid": "5c91edde-e140-5786-744a-8bb537668a31",
+      "DisplayName": "Assembly-CSharp",
+      "ColorIndex": 0
+    },
+    "5f1a6644-12ca-51a3-108a-8c90fd20baac": {
+      "ProjectGuid": "5f1a6644-12ca-51a3-108a-8c90fd20baac",
+      "DisplayName": "Mirror",
+      "ColorIndex": 1
+    },
+    "daa01e30-ae8a-ef32-5d0a-612fa5ca1877": {
+      "ProjectGuid": "daa01e30-ae8a-ef32-5d0a-612fa5ca1877",
+      "DisplayName": "FizzySteamworks",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Прочие файлы",
+      "ColorIndex": -1
+    },
+    "d711cf67-aeb1-6302-5d03-86f66624b6cf": {
+      "ProjectGuid": "d711cf67-aeb1-6302-5d03-86f66624b6cf",
+      "DisplayName": "Assembly-CSharp-Editor",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

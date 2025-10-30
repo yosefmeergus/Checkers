@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "653c4d46-4ef4-d168-e6d6-6199e72f48ee": {
+      "ProjectGuid": "653c4d46-4ef4-d168-e6d6-6199e72f48ee",
+      "DisplayName": "Assembly-CSharp",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "c882bc1e-d527-cec8-69eb-5cb45e98f4eb": {
+      "ProjectGuid": "c882bc1e-d527-cec8-69eb-5cb45e98f4eb",
+      "DisplayName": "Mirror",
+      "ColorIndex": 1
+    },
+    "b0100976-3532-684c-4abc-1b5852b75c39": {
+      "ProjectGuid": "b0100976-3532-684c-4abc-1b5852b75c39",
+      "DisplayName": "com.rlabrecque.steamworks.net",
+      "ColorIndex": 2
+    },
+    "6a68f964-321d-ecc6-befa-8206507f0e59": {
+      "ProjectGuid": "6a68f964-321d-ecc6-befa-8206507f0e59",
+      "DisplayName": "FizzySteamworks",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}
