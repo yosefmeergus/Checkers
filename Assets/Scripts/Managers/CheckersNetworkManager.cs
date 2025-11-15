@@ -10,4 +10,20 @@ public class CheckersNetworkManager : NetworkManager
 {
     [SerializeField] GameObject gameOverHandlerPrefab, boardPrefab, 
         turnsHandlerPrefab;
+    public static event Action OnClientConnected;
+
+    public override void OnClientConnect()
+    {
+        base.OnClientConnect();
+        OnClientConnected?.Invoke();
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection connection)
+    {
+        GameObject playerInstance = Instantiate(playerPrefab);
+        NetworkServer.AddPlayerForConnection(connection, playerInstance);   
+        PlayerNetwork player = playerInstance.GetComponent<PlayerNetwork>();
+        player.IsWhite = numPlayers == 1;
+        player.DisplayName = player.IsWhite ? "White" : "black";
+    }
 }
