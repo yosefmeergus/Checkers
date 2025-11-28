@@ -9,7 +9,7 @@ public class PlayerNetwork : Player
 {
     public static event Action OnPlayerInfoUpdated;
     [SyncVar(hook = nameof(HandleDisplayNameUpdate))]
-    private string displayName;
+    private string displayName = "Waiting for player";
 
     public string DisplayName
     {
@@ -20,6 +20,26 @@ public class PlayerNetwork : Player
 
     private void HandleDisplayNameUpdate(string oldValue, string newValue)
     {
+        print("display name synced");
+        OnPlayerInfoUpdated?.Invoke();
+    }
+
+    public override void OnStartClient()
+    {
+        if(!isClientOnly)
+        {
+            return;     
+        }
+        ((CheckersNetworkManager)(NetworkManager.singleton)).NetworkPlayers.Add(this);
+    }
+
+    public override void OnStopClient()
+    {
+        if (isClientOnly)
+        {
+            return;
+        }
+        ((CheckersNetworkManager)(NetworkManager.singleton)).NetworkPlayers.Remove(this);
         OnPlayerInfoUpdated?.Invoke();
     }
 }
