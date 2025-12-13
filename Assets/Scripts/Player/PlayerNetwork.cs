@@ -8,8 +8,13 @@ using UnityEngine;
 public class PlayerNetwork : Player
 {
     public static event Action OnPlayerInfoUpdated;
+    public static event Action<bool> OnPlayerLobbyOwnerUpdated;
     [SyncVar(hook = nameof(HandleDisplayNameUpdate))]
     private string displayName = "Waiting for player";
+    [SyncVar(hook = nameof(HandleLobbyOwnerUpdate))]
+    private bool lobbyOwner;
+
+
 
     public string DisplayName
     {
@@ -17,10 +22,25 @@ public class PlayerNetwork : Player
         [ServerCallback]
         set => displayName = value; 
     }
+    public bool LobbyOwner 
+    { 
+        get => lobbyOwner;
+        [ServerCallback]
+        set => lobbyOwner = value;
+    }
+
+
+    private void HandleLobbyOwnerUpdate(bool oldValue, bool newValue)
+    {
+        if (hasAuthority)
+        {
+            OnPlayerLobbyOwnerUpdated?.Invoke(newValue);
+        }
+
+    }
 
     private void HandleDisplayNameUpdate(string oldValue, string newValue)
     {
-        print("display name synced");
         OnPlayerInfoUpdated?.Invoke();
     }
 
@@ -42,4 +62,6 @@ public class PlayerNetwork : Player
         ((CheckersNetworkManager)(NetworkManager.singleton)).NetworkPlayers.Remove(this);
         OnPlayerInfoUpdated?.Invoke();
     }
+
+
 }

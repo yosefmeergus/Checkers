@@ -13,12 +13,13 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartGame()
     {
-        
+        NetworkManager.singleton.ServerChangeScene("Game Scene");
     }
 
     private void OnEnable()
     {
         PlayerNetwork.OnPlayerInfoUpdated += HandlePlayerInfoUpdated;
+        PlayerNetwork.OnPlayerLobbyOwnerUpdated += HandlePlayerLobbyOwnerUpdated;
     }
 
     private void HandlePlayerInfoUpdated()
@@ -32,6 +33,12 @@ public class LobbyMenu : MonoBehaviour
         {
             playerNameTexts[i].text = "Waiting for player";
         }
+        startGameButton.interactable = players.Count == 2;
+    }
+
+    private void HandlePlayerLobbyOwnerUpdated(bool isLobbyOwner)
+    {
+        startGameButton.gameObject.SetActive(isLobbyOwner);
     }
 
     private void OnDisable()
