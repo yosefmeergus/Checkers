@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class CheckersNetworkManager : NetworkManager
 {
-    [SerializeField] GameObject gameOverHandlerPrefab, boardPrefab, 
-        turnsHandlerPrefab;
+    [SerializeField] GameObject gameOverHandlerPrefab, boardPrefab, turnsHandlerPrefab;
     public static event Action OnClientConnected;
     [SerializeField]
     private List<PlayerNetwork> networkPlayers = new List<PlayerNetwork>();
@@ -37,6 +36,7 @@ public class CheckersNetworkManager : NetworkManager
         player.IsWhite = numPlayers == 1;
         networkPlayers.Add(player);
         player.DisplayName = player.IsWhite ? "White" : "black";
+        player.LobbyOwner = numPlayers == 1;
     }
     public override void OnServerDisconnect(NetworkConnection connection)
     {
@@ -48,6 +48,23 @@ public class CheckersNetworkManager : NetworkManager
         PlayerNetwork player = connection.identity.GetComponent<PlayerNetwork>();
         networkPlayers.Remove(player);
 
+    }
+
+    public override void OnStartServer()
+    {
+        GameObject board = Instantiate(boardPrefab);
+        NetworkServer.Spawn(board);
+        GameObject turnsHandler = Instantiate(turnsHandlerPrefab);
+        NetworkServer.Spawn(turnsHandler);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if(sceneName == "Game Scene")
+        {
+            GameObject gameOverHandler = Instantiate(gameOverHandlerPrefab);
+            NetworkServer.Spawn(gameOverHandler);
+        }
     }
 
     public override void OnStopServer()
