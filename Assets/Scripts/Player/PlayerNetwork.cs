@@ -29,6 +29,10 @@ public class PlayerNetwork : Player
         set => lobbyOwner = value;
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);   
+    }
 
     private void HandleLobbyOwnerUpdate(bool oldValue, bool newValue)
     {
