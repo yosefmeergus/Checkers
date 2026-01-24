@@ -13,8 +13,10 @@ public class CheckersNetworkManager : NetworkManager
     public static event Action OnGameStarted;
     [SerializeField]
     private List<PlayerNetwork> networkPlayers = new List<PlayerNetwork>();
+    private List<Player> players = new List<Player>();
 
     public List<PlayerNetwork> NetworkPlayers { get => networkPlayers; set => networkPlayers = value; }
+    public List<Player> Players { get => players; set => players = value; }
 
     public override void OnClientConnect()
     {
@@ -36,6 +38,7 @@ public class CheckersNetworkManager : NetworkManager
         PlayerNetwork player = playerInstance.GetComponent<PlayerNetwork>();
         player.IsWhite = numPlayers == 1;
         networkPlayers.Add(player);
+        players.Add(player);
         player.DisplayName = player.IsWhite ? "White" : "black";
         player.LobbyOwner = numPlayers == 1;
 
@@ -49,7 +52,7 @@ public class CheckersNetworkManager : NetworkManager
         }
         PlayerNetwork player = connection.identity.GetComponent<PlayerNetwork>();
         networkPlayers.Remove(player);
-
+        players.Remove(player);
     }
 
     public override void OnStartServer()
@@ -73,5 +76,6 @@ public class CheckersNetworkManager : NetworkManager
     public override void OnStopServer()
     {
         networkPlayers.Clear();
+        players.Clear();
     }
 }

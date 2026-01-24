@@ -67,5 +67,11 @@ public class PlayerNetwork : Player
         OnPlayerInfoUpdated?.Invoke();
     }
 
+    [Command]
+    public void CmdNextTurn()
+    {
+        TurnsHandler.Instance.NextTurn();
+    }
+
 
 }
