@@ -20,13 +20,13 @@ public class TurnsHandlerNetworked : TurnsHandler
     protected override void FillMovesList()
     {
         base.FillMovesList();
-        GenerateMovesRpc(piecesHandler.PiecesParent);
+        GenerateMovesRpc(piecesHandler);
     }
 
     [ClientRpc]
-    private void GenerateMovesRpc(Transform playerPiecesParent)
+    private void GenerateMovesRpc(PlayerPiecesHandler playerPiecesHandler)
     {
         if (NetworkServer.active) return;
-        GenerateMoves(playerPiecesParent);
+        GenerateMoves(playerPiecesHandler.PiecesParent);
     }
 }
