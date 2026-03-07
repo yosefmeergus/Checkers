@@ -50,7 +50,7 @@ public class PieceMovementHandler : NetworkBehaviour
         transform.position = new Vector3(
             position.x,
             transform.position.y,
-            position.z);
+            position.z); 
         if (((position.z == 7 && pieceInfo.MyColor == PieceColor.White)
             || (position.z == 0 && pieceInfo.MyColor == PieceColor.Black))
             && pieceInfo.MyType == PieceType.Man)
