@@ -44,4 +44,15 @@ public class PieceMovementHandlerNetwork : PieceMovementHandler
     {
         OnPieceReachedBackline?.Invoke(promotionHandler, newPosition.x, newPosition.y);
     }
+
+    protected override void PlayAudio()
+    {
+        RpcPlaySound();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySound()
+    {
+        base.PlayAudio();
+    }
 }
