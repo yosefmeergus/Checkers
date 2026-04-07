@@ -14,6 +14,30 @@ public class BoardNetwork : Board
     public override void OnStartServer()
     {
         FillBoardList(boardList);
+        PieceMovementHandlerNetwork.OnPieceReachedBackline += TryPromotePieceOnBoard;
+    }
+
+    public override void OnStopServer()
+    {
+        PieceMovementHandlerNetwork.OnPieceReachedBackline -= TryPromotePieceOnBoard;
+    }
+
+    [ServerCallback]
+    private bool TryPromotePieceOnBoard(PiecePromotionHandler piece, int x, int z)
+    {
+        PromotePieceOnBoard(BoardList, x, z);
+        RpcPromotePieceOnBoard(x, z);
+        return true;
+    }
+
+    [ClientRpc]
+    private void RpcPromotePieceOnBoard(int x, int z)
+    {
+        if (NetworkServer.active)
+        {
+            return;
+        }
+        PromotePieceOnBoard(BoardList, x, z);
     }
 
     [ServerCallback]
