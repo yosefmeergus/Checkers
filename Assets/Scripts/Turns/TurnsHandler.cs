@@ -33,12 +33,20 @@ public class TurnsHandler : NetworkBehaviour
 
     public void Surrender()
     {
-        OnGameOver?.Invoke(WhiteTurn ? BLACK_WIN : WHITE_WIN);
-    }
-
-    public void Surrender(string result)
-    {
-        OnGameOver?.Invoke(result);
+        if (this is TurnsHandlerLocal)
+        {
+            OnGameOver?.Invoke(WhiteTurn ? BLACK_WIN : WHITE_WIN);
+        }
+        else if (this is TurnsHandlerNetworked)
+        {
+            foreach (PlayerNetwork player in Players)
+            {
+                if (player.IsWhite != WhiteTurn)
+                {
+                    OnGameOver?.Invoke($"Winner is {player.DisplayName}");
+                }
+            }
+        }
     }
 
     public void NextTurn()
@@ -67,6 +75,16 @@ public class TurnsHandler : NetworkBehaviour
         else if (this is TurnsHandlerLocal)
         {
             OnGameOver?.Invoke(WhiteTurn ? WHITE_WIN : BLACK_WIN);
+        }
+        else if (this is TurnsHandlerNetworked)
+        {
+            foreach (PlayerNetwork player in Players)
+            {
+                if(player.IsWhite == WhiteTurn)
+                {
+                    OnGameOver?.Invoke($"Winner is {player.DisplayName}");
+                }
+            }
         }
     }
 

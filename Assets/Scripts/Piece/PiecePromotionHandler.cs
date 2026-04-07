@@ -19,5 +19,5 @@ public class PiecePromotionHandler : NetworkBehaviour
     {
         piece.MyType = PieceType.King;
         modelTransform.rotation = Quaternion.Euler(180, transform.rotation.eulerAngles.y, 0);
-    }
+    }   
 }

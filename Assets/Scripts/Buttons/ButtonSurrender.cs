@@ -8,13 +8,6 @@ public class ButtonSurrender : MonoBehaviour
 {
     public void Surrender()
     {
-        if (LocalGameManager.Instance)
-        {
-            TurnsHandler.Instance.Surrender();
-        }
-        else
-        {
-            
-        }
+        TurnsHandler.Instance.Surrender();
     }
 }
